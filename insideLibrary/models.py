@@ -4,7 +4,7 @@ from datetime import date
 
 class Book(models.Model):
     title= models.CharField(max_length=200)
-    authors= models.TextField(max_length=35)
+    author= models.TextField(max_length=35)
     isbn= models.CharField(max_length=20, unique=True)
     publisher= models.TextField(max_length=50)
     num_pages= models.IntegerField()

@@ -16,12 +16,12 @@ def book_list(request): #request is HTTP request made by user (GET or POST)
 def add_book(request):
     if request.method== 'POST':
         title= request.POST['title']
-        authors= request.POST['authors']
+        author= request.POST['author']
         isbn= request.POST['isbn']
         publisher= request.POST['publisher']
         num_pages= request.POST['num_pages']
         stock= request.POST['stock']
-        Book.objects.create(title= title, authors=authors,isbn=isbn, publisher=publisher, num_pages=num_pages, stock=stock ) #we are creating an object with these fields
+        Book.objects.create(title= title, author=author,isbn=isbn, publisher=publisher, num_pages=num_pages, stock=stock ) #we are creating an object with these fields
         return redirect('book_list')
     return render(request, 'books/add_book.html')
 
@@ -37,7 +37,7 @@ def import_books(request):
         for book in books:
             Book.objects.get_or_create(
                 title= book['title'],
-                authors= book['authors'],
+                author= book['author'],
                 isbn= book['isbn'],
                 publisher= book['publisher'],
                 num_pages= int(book['num_pages']),
