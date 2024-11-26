@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import books</title>
+</head>
+<body>
+    <h1>Import Books from API</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="title">Search By Title: </label>
+        <input type="text" id="title" name="title"> <br> <br>
+
+        <label for="page">Page Number:  </label>
+        <input type="number" id="page" name="page" value="1" min="1"> <br> <br>
+
+        <button type="submit">Import Books</button>
+        
+    </form>
+    <br>
+    <a href="{% url 'book_list' %}">Back to Book List</a>
+</body>
+</html>
