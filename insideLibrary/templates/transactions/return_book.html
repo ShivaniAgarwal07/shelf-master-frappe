@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Return Book</title>
+</head>
+<body>
+    <h1>Return Book</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="transaction">Select Transaction:</label>
+        <select name="transaction" id="transaction" required>
+            {% for transaction in transactions %}
+                <option value="{{ transaction.id }}">
+                    {{ transaction.member.name }} - {{ transaction.book.title }} (Issued on {{ transaction.issue_date }})
+                </option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="return_date">Return Date:</label>
+        <input type="date" name="return_date" id="return_date" value="{{ today }}" required>
+        <br><br>
+        <label for="fees">Late Fee (if any):</label>
+        <input type="text" name="fees" id="fees" value="0.00" readonly>
+        <br><br>
+        <button type="submit">Return Book</button>
+    </form>
+    <br>
+    <a href="{% url 'transaction_list' %}">Back to Transactions</a>
+</body>
+</html>

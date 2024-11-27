@@ -8,15 +8,38 @@
 </head>
 <body>
     <h1>Book List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>ISBN</th>
+                <th>Publisher</th>
+                <th>Pages</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{book.title}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.isbn}}</td>
+                <td>{{book.publisher}}</td>
+                <td>{{book.num_pages}}</td>
+                <td>{{book.stock}}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td>No Books Found. </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
     <a href="{% url 'add_book'  %}">Add Book</a>
     <a href="{% url 'import_books'  %}">Import Books</a>
 
-    <ul>
-        {% for book in books%}
-        <li>
-            {{book.title}} by {{book.author}} (stock: {{book.stock}})
-        </li>
-        {% endfor %}
-    </ul>
+    
 </body>
 </html>

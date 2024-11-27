@@ -28,9 +28,7 @@ class Transaction(models.Model):
     return_date= models.DateField(null=True, blank=True) # initially date will be null and field will be blank and no validation error will occur. 
     fee= models.IntegerField()
 
-    def is_overdue(self):
-        if self.return_date: #checks if return_date exists or not
-            return date.today()> self.return_date #if current date is greater than return date, then transaction is overdue
-        return False #otherwise it will return false
+    def __str__(self):
+        return f"{self.member.name} - {self.book.title} (Issued on {self.issue_date})"
 
 

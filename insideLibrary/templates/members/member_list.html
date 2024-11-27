@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member List</title>
+</head>
+<body>
+    <h1>Members List</h1>
+    <a href="{% url 'add_member' %}">Add Member</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Outstanding Fee</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in members %}
+            <tr>
+                <td>{{member.name}}</td>
+                <td>{{member.email}}</td>
+                <td>{{member.existing_debt}}</td>
+                <td>
+                    <a href="{% url 'edit_member' member.pk %}">Edit Member</a>
+                    <a href="{% url 'delete_member' member.pk %}">Delete Member</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td> No Members Found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

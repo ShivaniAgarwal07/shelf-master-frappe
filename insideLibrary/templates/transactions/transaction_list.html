@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction List</title>
+</head>
+<body>
+    <h1>Transaction List</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Member</th>
+                <th>Book</th>
+                <th>Issue Date</th>
+                <th>Return Date</th>
+                <th>Late Fees</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.member.name }}</td>
+                    <td>{{ transaction.book.title }}</td>
+                    <td>{{ transaction.issue_date }}</td>
+                    <td>{% if transaction.return_date %}{{ transaction.return_date }}{% else %}Not Returned{% endif %}</td>
+                    <td>{% if transaction.fees %}₹{{ transaction.fees }}{% else %}N/A{% endif %}</td>
+                    <td>
+                        {% if not transaction.return_date %}
+                            <a href="{% url 'return_book' %}">Return Book</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">No transactions found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{% url 'issue_book' %}">Issue a Book</a>
+</body>
+</html>
